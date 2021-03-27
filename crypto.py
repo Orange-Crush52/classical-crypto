@@ -155,8 +155,6 @@ def add_solver(string):
             possibilities.append(guess)
     maxed = 0
     for i in az_count:
-        # print(az_count[i])
-        # print(maxed)
         if az_count[i] > maxed:
             maxed = list(az_count.keys())[i - 1]
     for i in string:

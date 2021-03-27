@@ -51,10 +51,6 @@ def frequency(string):
 def order(letter_count):
     # 5, 20, 1, 15, 9, 14, 19, 8, 18, 4, 12, 3, 21, 13, 6, 7, 16, 25, 2, 17, 22, 11, 26, 10, 24, 25
     none = []
-    # for i in rang:
-    #     if letter_count[i] == -1:
-    #         value = letter_count.pop(i)
-    #         none.append(i)
     most_list = []
     found = []
     for i in letter_count.keys():
@@ -62,12 +58,10 @@ def order(letter_count):
         letter = 0
 
         for w in letter_count.keys():
-            if letter_count[w] > most:
+            if letter_count[w] > most and not w in found:
+                most = letter_count[w]
 
-                if not w in found:
-                    most = letter_count[w]
-
-                    letter = w
+                letter = w
         found.append(letter)
         most_list.append(letter)
 
@@ -80,12 +74,15 @@ def order(letter_count):
 
 
 def group_letter_count(string):
-    string = string.lower()
+    string = string.lower().replace(" ", "")
+
     found = []
     frequencies = {}
     for i in range(len(string)):
-        group = string[i]+string[i+1]
-        
+        try:
+            group = string[i]+string[i+1]
+        except IndexError:
+            return frequencies 
         if group in found:
             frequencies[group]+=1
         else:
@@ -95,6 +92,6 @@ def group_letter_count(string):
     return frequencies
 
     
-print(group_letter_count("hEllo my nameme is jack"))
-# print(order(group_letter_count("hEllllo my nameme is connorhe")))
+print(group_letter_count("hEhelhehelo mhey nameme is jack"))
+print(order(group_letter_count("hEhelhehelo mhey nameme is jack")))
 
