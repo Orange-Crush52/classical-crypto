@@ -1,9 +1,4 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Apr  2 14:38:11 2020
 
-@author: james
-"""
 
 rang = range(26)
 
@@ -50,7 +45,7 @@ def frequency(string):
     return count
 
 
-#print(frequency("aaaaa hello my name is connor"))
+
 
 
 def order(letter_count):
@@ -85,23 +80,21 @@ def order(letter_count):
 
 
 def group_letter_count(string):
-    abcs = 'abcdefghijklmnopqrstuvwxyz'
+    string = string.lower()
     found = []
     frequencies = {}
-    string = string.lower().replace(" ", "")
-    if len(string)%2 != 0:
-        string += "x"
-    groups = [(string[i:i+2]) for i in range(0, len(string), 2)]
-    # print(groups)
-    for i in range(len(groups)):
-        group = groups[i]
-        if not group in found:
-            frequencies[group] = 1
-            found.append(group)
+    for i in range(len(string)):
+        group = string[i]+string[i+1]
+        
+        if group in found:
+            frequencies[group]+=1
         else:
-            frequencies[group] += 1
+            found.append(group)
+            frequencies[group] = 1
 
     return frequencies
-# print(group_letter_count("hEllo my nameme is connorhe"))
+
+    
+print(group_letter_count("hEllo my nameme is jack"))
 # print(order(group_letter_count("hEllllo my nameme is connorhe")))
 

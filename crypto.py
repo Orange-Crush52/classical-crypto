@@ -1,19 +1,6 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Mar 25 12:24:28 2020
 
-@author: james
-"""
-
-# chryptography can solve a simple code ex a = 1 maybe use dictionary
-
-# add 1 to the letter check if the word works repaet labor intensive
-# make the number the key and letter value
-# convert string into numbers 
-# add value and return new letter
 import dictionaryload
 import frequency
-# from sympy import symbols, solve
 import time
 import numpy as np
 import math
@@ -281,23 +268,25 @@ def hill_converter(string, matrix, grouping):
     if ((inverse_determanint(matrix)[0][0]*inverse_determanint(matrix)[1][1] - inverse_determanint(matrix)[0][1]*inverse_determanint(matrix)[1][0]) % 26) % 2== 0:
         return "matrix is not able to be solved"
     inverse_key = inverse_determanint(matrix, determanint)
+
     string_spaces = string.split(" ")
     # string.replace(" ", "")
     if len(string) % 2 != 0:
         string += "x"
-    # Breaks the strings into groups of grouping
+    # Breaks the strings into groups of grouping 
     out = [(string[i:i+grouping]) for i in range(0, len(string), grouping)] 
     # -1 is space
     final =""
     for group in out:
         # transfers the string to the number froms than places them into a numpy array 
-        numbers = np.array(list(map(lambda i: abcs.find(i), group))).reshape(1, 2)#.tolist()
+        numbers = np.array(list(map(lambda i: abcs.find(i)+1, group))).reshape(1, 2)#.tolist()
         # flattens lists
         flatten = lambda l: [item for sublist in l for item in sublist]
         # this is where the numbers are encoded using the matrix
         mult_matrix = np.array(list(map(lambda j: (matrix.dot(j)) % 26, numbers)))
         # converts the numbers back to string and than puts it into final
-        final += "".join(list(map(lambda i: az[i], flatten(mult_matrix))))
+        final += "".join(list(map(lambda i: az[i-1], flatten(mult_matrix))))
+
     pos = 0
     words = list(final)
     for i in range(len(string_spaces)):
@@ -305,7 +294,7 @@ def hill_converter(string, matrix, grouping):
         pos += len(string_spaces[i])
     return "".join(words) , inverse_key
 
-# print(hill_converter("clds", np.array([[16, 7], [17, 23]]), 2))
+print(hill_converter("clds", np.array([[16, 7], [17, 23]]), 2))
 
 
 
@@ -317,7 +306,7 @@ start_time = time.time()
 # print(mult_solver("pwxxq mk bomw ey sqbbqj"))
 # the number we are using will always be one less than the one in the paper since our a starts at 0
 # print(affine_solver("qhccl fp ivfh tx bliilu jldce pld ctzh al ydp vi luvinh xqtua ", True))
-# print(hill_converter("Thththththththecatdddddisstuckinthetree", np.array([[16, 7],[17, 23]]), 2))
+print(hill_converter("book", np.array([[5, 3],[11, 8]]), 2))
 # print(inverse_determanint(np.array([[4, 5],[3, 6]]), 9))
 #km
 
