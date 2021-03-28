@@ -24,31 +24,47 @@ def word_finder(string):
     
     return words
 
+def get_key(val, dict):
+    for key, value in dict.items():
+         if val == value:
+             return key
+
 # print(word_finder("iwanttoeatfood"))
+
+def searcher(dict):
+    
+
 def word_joiner(word_dict, string):
     completed = False
-    final = {}
-    spaces = 0
+    final = ""
+    
+    starts = sorted(list(word_dict.values()), key = lambda x: x[0]) 
+    ends = sorted(list(word_dict.values()), key = lambda x: x[1])
+    print(starts)
+    index = 0
+    future= {}
     while not completed:
-        for word, pos in word_dict.items():
-            print(word_finder(string[:pos[0]+spaces]+string[pos[1]+1+spaces:]))
-            print({key:val for key, val in word_dict.items() if key != word})
-            print(string[:pos[0]+spaces]+string[pos[1]+1+spaces:])
-            # checks if the amount of words present is more than 2 less after removing one of the potential words
-            # if so it means its one of the actual words
-            # use path finding like in go project
-            if {key:val for key, val in word_dict.items() if key != word}.keys() == word_finder(string[:pos[0]+spaces]+string[pos[1]+1+spaces:]).keys():
-                print(word)
-                if not word in final.keys():
-                    final[word]=pos
-                    string = string[:pos[1]+1+spaces] + " " + string[pos[1]+1+spaces:]
-                    spaces += 1
-            else:
-                print("flase", word)
-        print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-        print(final)
-        print(string)
         
+        
+        pos_words = [i for i in starts if i[0] == index]
+        next_pos = [i for i in starts if i[0] == index+1]
+        
+        print(pos_words)
+        print(index)
+        if len(pos_words) == 1:
+            index += len(get_key(pos_words[0], word_dict))
+            final += get_key(pos_words[0], word_dict)
+        
+        else: 
+            for i in pos_words:
+                future[i] = [j for j in ends if j[0] == i[1]+1]
+            print(future)
+
+        if index >= len(string):
+           return final  
+
+           
         
 print(word_joiner(word_finder("iwanttoeatfood"), "iwanttoeatfood"))
 print("--- %s seconds ---" % (time.time() - start_time))
+
