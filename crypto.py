@@ -91,9 +91,8 @@ def add_converter(string, adder):
             i += adder
             i = i % 26
             new_string += az[i]
-    # add_inverse = 26 - adder
 
-    return new_string  # , add_inverse
+    return new_string
 
 
 def mult_converter(string, multiplier):
@@ -294,7 +293,8 @@ def hill_converter(string, matrix, grouping):
 
 print(hill_converter("clds", np.array([[16, 7], [17, 23]]), 2))
 
-
+def hill_solver(string, grouping, crib=None):
+    string = string.lower()
 
 start_time = time.time()
 # print(mult_converter("hello my name is connor", 15))
