@@ -2,6 +2,7 @@
 import dictionaryload
 import frequency
 import time
+import word_finder
 import numpy as np
 import math
 import re
@@ -243,11 +244,11 @@ def inverse_determanint(matrix, determinant=None):
 
     return mult_inverse
 
-# print(inverse_determanint(np.array([[40, 61], [27, 21]])))
+# print(inverse_determanint(np.array([[4, 5], [3, 6]])))
 
 def hill_converter(string, matrix, grouping):
     # converts string to hill cypher using matrix
-    print(matrix)
+    # print(matrix)
     string = string.lower()
     try: 
         determanint = (matrix[0][0]*matrix[1][1] - matrix[0][1]*matrix[1][0]) % 26
@@ -289,12 +290,22 @@ def hill_converter(string, matrix, grouping):
     for i in range(len(string_spaces)):
         words.insert(pos+i, " ")
         pos += len(string_spaces[i])
-    return "".join(words) , inverse_key
+    
+    return "".join(words).strip(" ") , inverse_key
 
-print(hill_converter("clds", np.array([[16, 7], [17, 23]]), 2))
+# print(hill_converter("clds", np.array([[16, 7], [17, 23]]), 2))
 
-def hill_solver(string, grouping, crib=None):
-    string = string.lower()
+def dert_checker(matrix):
+    determanint = (matrix[0][0]*matrix[1][1] - matrix[0][1]*matrix[1][0]) % 26
+    if determanint == 13:
+        return False
+    elif determanint % 2 == 0:
+        return False
+    else:
+        return True
+    
+
+
 
 start_time = time.time()
 # print(mult_converter("hello my name is connor", 15))
@@ -304,9 +315,9 @@ start_time = time.time()
 # print(mult_solver("pwxxq mk bomw ey sqbbqj"))
 # the number we are using will always be one less than the one in the paper since our a starts at 0
 # print(affine_solver("qhccl fp ivfh tx bliilu jldce pld ctzh al ydp vi luvinh xqtua ", True))
-print(hill_converter("book", np.array([[5, 3],[11, 8]]), 2))
+# print(hill_converter("iwanttoeatfood", np.array([[5, 3],[11, 8]]), 2))
 # print(inverse_determanint(np.array([[4, 5],[3, 6]]), 9))
-#km
+
 
 print("--- %s seconds ---" % (time.time() - start_time))
 

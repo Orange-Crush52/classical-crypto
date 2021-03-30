@@ -92,6 +92,4 @@ def group_letter_count(string):
     return frequencies
 
     
-print(group_letter_count("hEhelhehelo mhey nameme is jack"))
-print(order(group_letter_count("hEhelhehelo mhey nameme is jack")))
 
