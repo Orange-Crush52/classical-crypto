@@ -4,7 +4,7 @@ import re
 
 word_list = dictionaryload.load('2of4brif.txt')
 
-start_time = time.time()
+
 def word_finder(string):
     # finds all words within a string
     words = {}
@@ -26,7 +26,7 @@ def get_key(val, dict):
              return key
 
 
-print("--- %s seconds ---" % (time.time() - start_time))
+
 
 
 
